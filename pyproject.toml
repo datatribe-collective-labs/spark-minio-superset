@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "spark-minio-superset"
+version = "0.1.0"
+description = "A DataTribe Collective project integrating Spark, Minio, and Superset"
+authors = ["Eveliina Hampus <eveliinahampus@gmail.com>", "Chanukya Pekala <chanukya.pekala@gmail.com>", "Babak Firoozi Fooladi <email@example.com>"]
+license = "MIT"
+
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

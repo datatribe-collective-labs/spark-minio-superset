@@ -1,0 +1,36 @@
+services:
+  minio:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile.minio
+    ports:
+      - "9000:9000"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY}
+    volumes:
+      - minio_data:/data
+
+  spark:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile.spark
+    ports:
+      - "8080:8080"
+    depends_on:
+      - minio
+
+  superset:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile.superset
+    ports:
+      - "8088:8088"
+    depends_on:
+      - spark
+      - minio
+    environment:
+      SUPERSET_DATABASE_URI: sqlite:////app/superset.db
+
+volumes:
+  minio_data:
